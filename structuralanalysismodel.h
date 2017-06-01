@@ -38,7 +38,7 @@ class Units
 {
 public:
     string length="";
-    string forth="";
+    string force="";
     string temperature="";
 };
 
@@ -72,7 +72,7 @@ public:
 
     class Fiber{
     public:
-        string naterial="";
+        string material="";
         double area=0.0;
         double zCoord=0.0;
         double yCoord=0.0;
@@ -108,11 +108,11 @@ public:
     void WriteJSON(string path);
 
     string revision="";
-    int   ndm=3;
-    int   nfd=6;
-    Geometry geo;
+    int   ndm=0;
+    int   ndf=0;
+    Geometry geometry;
     Units units;
-    Properties prop;
+    Properties properties;
     string BIM="";
 
 };
