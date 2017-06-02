@@ -2,8 +2,8 @@
 #include <fstream>
 #include <vector>
 
-#include "marcfilereader.h"
-#include "structuralanalysismodel.h"
+#include "MarcFileReader.h"
+#include "StructuralAnalysisModel.h"
 using namespace std;
 
 

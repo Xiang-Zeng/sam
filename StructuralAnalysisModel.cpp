@@ -1,4 +1,4 @@
-#include "structuralanalysismodel.h"
+#include "StructuralAnalysisModel.h"
 #include <fstream>
 
 StructuralAnalysisModel::StructuralAnalysisModel()

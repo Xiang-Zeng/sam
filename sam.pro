@@ -8,8 +8,14 @@ SOURCES += main.cpp \
     lib_json/json_value.cpp \
     lib_json/json_valueiterator.inl \
     lib_json/json_writer.cpp \
-    marcfilereader.cpp \
-    structuralanalysismodel.cpp
+    StructuralAnalysisModel.cpp \
+    MarcFileReader.cpp \
+    Units.cpp \
+    Geometry.cpp \
+    Property.cpp \
+    Material.cpp \
+    Fiber.cpp \
+    Section.cpp
 
 HEADERS += \
     json/allocator.h \
@@ -24,8 +30,14 @@ HEADERS += \
     json/version.h \
     json/writer.h \
     lib_json/json_tool.h \
-    marcfilereader.h \
-    structuralanalysismodel.h
+    StructuralAnalysisModel.h \
+    MarcFileReader.h \
+    Units.h \
+    Geometry.h \
+    Property.h \
+    Material.h \
+    Fiber.h \
+    Section.h
 
 DISTFILES += \
     README.md
