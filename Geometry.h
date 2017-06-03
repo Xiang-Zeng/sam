@@ -3,12 +3,16 @@
 
 #include <string>
 #include <vector>
+#include "json/json.h"
 using namespace std;
 
 class Geometry
 {
 public:
     Geometry();
+
+    Json::Value toJson();
+
     struct Node{
         string name="";
         int ndf=6;

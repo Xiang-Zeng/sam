@@ -8,6 +8,7 @@ class Section
 {
 public:
     Section();
+    Json::Value toJson();
 
     vector<Fiber> fibers;
     string Avz="";

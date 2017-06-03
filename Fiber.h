@@ -2,12 +2,14 @@
 #define FIBER_H
 
 #include <string>
+#include "json/json.h"
 using namespace std;
 
 class Fiber
 {
 public:
     Fiber();
+    Json::Value toJson();
 
     string material="";
     double area=0.0;

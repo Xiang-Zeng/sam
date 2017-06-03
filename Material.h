@@ -2,12 +2,15 @@
 #define MATERIAL_H
 
 #include <string>
+#include <json/json.h>
 using namespace std;
 
 class Material
 {
 public:
     Material();
+    Json::Value toJson();
+
     double nu=0.0;
     double rho=0.0;
     string name="";

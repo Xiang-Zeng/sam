@@ -8,6 +8,7 @@ class Property
 {
 public:
     Property();
+    Json::Value toJson();
 
     struct Element{
         string name="";

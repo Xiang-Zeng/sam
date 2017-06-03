@@ -14,7 +14,7 @@ int main()
     StructuralAnalysisModel* sam = new StructuralAnalysisModel;
     mfr.ReadMarc(sam);
 
-    sam->WriteJSON("output.json");
+    sam->WriteJson("output.json");
 
     delete sam;
     return 0;

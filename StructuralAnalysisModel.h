@@ -16,14 +16,16 @@ class StructuralAnalysisModel
 public:
 
     StructuralAnalysisModel();
-    void WriteJSON(string path);
+    ~StructuralAnalysisModel();
+    Json::Value toJson();
+    void WriteJson(string path);
 
     string revision="";
     int   ndm=0;
     int   ndf=0;
-    Geometry geometry;
-    Units units;
-    Property properties;
+    Geometry * geometry;
+    Units * units;
+    Property * property;
     string BIM="";
 
 };
