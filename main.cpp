@@ -14,6 +14,9 @@ int main()
     StructuralAnalysisModel* sam = new StructuralAnalysisModel;
     mfr.ReadMarc(sam);
 
+    sam->units->force="N";
+    sam->units->length="mm";
+
     sam->WriteJson("output.json");
 
     delete sam;
