@@ -10,9 +10,11 @@ using namespace std;
 int main()
 {
     string path="input.dat";
-    MarcFileReader mfr(path);
+    string matcodePath="matcode.txt";
+    MarcFileReader mfr(path,matcodePath);
     StructuralAnalysisModel* sam = new StructuralAnalysisModel;
     mfr.ReadMarc(sam);
+    mfr.ReadMatcode(sam);
 
     sam->units->force="N";
     sam->units->length="mm";

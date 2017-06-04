@@ -4,13 +4,21 @@
 #include <math.h>
 using namespace std;
 
-MarcFileReader::MarcFileReader(string filePath)
+MarcFileReader::MarcFileReader(string filePath, string matcodePath)
 {
     fin.open(filePath);
     if(!fin.good())
     {
         cout<<"failed to open file "<<filePath.c_str()<<"!\n";
         fin.close();
+        exit(1);
+    }
+
+    finmat.open(matcodePath);
+    if(matcodePath!=""&&!finmat.good())
+    {
+        cout<<"failed to open file "<<matcodePath.c_str()<<"!\n";
+        finmat.close();
         exit(1);
     }
 
@@ -25,6 +33,7 @@ MarcFileReader::MarcFileReader(string filePath)
 
 MarcFileReader::~MarcFileReader(){
     fin.close();
+    finmat.close();
 }
 
 template <class Type>
@@ -34,6 +43,15 @@ Type MarcFileReader::s2num(const string& str)
     Type num;
     iss >> num;
     return num;
+}
+
+string MarcFileReader::int2s(int n)
+{
+    stringstream ss;
+    ss<<n;
+    string s;
+    ss>>s;
+    return s;
 }
 
 double MarcFileReader::marcs2d(string s, string p) //deal with the strange number format in Marc input file. e.g. -4.100000000+3
@@ -202,5 +220,53 @@ void MarcFileReader::ReadMarc(StructuralAnalysisModel *sam)
         }
 
     }
+
+}
+
+void MarcFileReader::ReadMatcode(StructuralAnalysisModel* sam)
+{
+    const int nConcrete=64; // nConcrete is the number of concrete fibers in a section. It differs among different types of matcode files.
+    const int nRebar=8; // nRebar is the number of rebar fibers in a section. It differs among different types of matcode files.
+
+    int nSec=0;
+    finmat>>nSec;
+    int countc=0;   //concrete
+    int countr=0;   //rebar
+    for(int i=0;i<nSec;i++)
+    {
+        int temp=0;
+        finmat>>temp;
+        double y=0.0,z=0.0; //y: short, z:long
+        finmat>>y>>z;
+        finmat>>sam->property->sections[i].G;
+        sam->property->sections[i].Jx = (y*z*z*z+y*y*y*z)/12.0;
+        for(int j=0;j<nConcrete;++j)    //Concrete fibers
+        {
+            Fiber fiber;
+            Material mat;
+            mat.name="concrete"+int2s(++countc);
+            fiber.material=mat.name;
+            finmat>>fiber.yCoord>>fiber.zCoord>>fiber.area;
+            finmat>>mat.fc>>mat.epsc>>mat.fcu>>mat.epscu;
+            mat.type="concrete";
+            sam->property->materials.push_back(mat);
+            sam->property->sections[i].fibers.push_back(fiber);
+        }
+        for(int j=0;j<nRebar;++j)    //Rebar fibers
+        {
+            Fiber fiber;
+            Material mat;
+            mat.name="Rebar"+int2s(++countr);
+            fiber.material=mat.name;
+            finmat>>fiber.yCoord>>fiber.zCoord>>fiber.area;
+            finmat>>mat.fy>>mat.Ec;
+            mat.type="steel rebar";
+            sam->property->materials.push_back(mat);
+            sam->property->sections[i].fibers.push_back(fiber);
+        }
+
+    }
+
+
 
 }

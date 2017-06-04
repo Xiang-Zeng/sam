@@ -18,9 +18,11 @@ public:
     double Ec=0.0;
     double Et=0.0;
     string type="";
+    double epsc=0.0;
     double epscu=0.0;
     double ft=0.0;
     double fcu=0.0;
+    double fy=0.0;  //steel rebar
 
 
 };

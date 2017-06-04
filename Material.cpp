@@ -14,8 +14,10 @@ Json::Value Material::toJson(){
     jmat["Ec"]=Json::Value(Ec);
     jmat["Et"]=Json::Value(Et);
     jmat["type"]=Json::Value(type);
+    jmat["epsc"]=Json::Value(epsc);
     jmat["epscu"]=Json::Value(epscu);
     jmat["ft"]=Json::Value(ft);
     jmat["fcu"]=Json::Value(fcu);
+    jmat["fy"]=Json::Value(fy);
     return jmat;
 }
