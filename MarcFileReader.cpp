@@ -186,12 +186,16 @@ void MarcFileReader::ReadMarc(StructuralAnalysisModel *sam)
                 ss>>sec.name;
                 sec.type="fiber";
                 sam->property->sections.push_back(sec);
+                Property::Element elem;
+                elem.name=sec.name;
+                elem.section=sec.name;
+                sam->property->elements.push_back(elem);
                 getline(fin,s);
                 vector<int> elist;
                 getList(fin,elist);
                 for(unsigned int i=0;i<elist.size();++i)
                 {
-                    sam->geometry->elements[elist[i]].type=sec.name;
+                    sam->geometry->elements[elist[i]].type=elem.name;
                 }
             }
             break;
@@ -206,11 +210,15 @@ void MarcFileReader::ReadMarc(StructuralAnalysisModel *sam)
                 sec.type="elastic";
                 sam->property->sections.push_back(sec);
                 getline(fin,s); // to do.
+                Property::Element elem;
+                elem.name=sec.name;
+                sam->property->elements.push_back(elem);
+                elem.section=sec.name;
                 vector<int> elist;
                 getList(fin,elist);
                 for(unsigned int i=0;i<elist.size();++i)
                 {
-                    sam->geometry->elements[elist[i]].type=sec.name;
+                    sam->geometry->elements[elist[i]].type=elem.name;
                 }
             }
             break;
