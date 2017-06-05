@@ -73,7 +73,7 @@ void MarcFileReader::getList(ifstream &fin,vector<int> &list)
         {
             int id=0;
             ss>>id;
-            list.push_back(id);
+            list.push_back(id-1);
         }
         getList(fin,list);
     }
@@ -108,7 +108,7 @@ void MarcFileReader::getList(ifstream &fin,vector<int> &list)
         {
             int id=0;
             ss>>id;
-            list.push_back(id);
+            list.push_back(id-1);
         }
     }
 }
