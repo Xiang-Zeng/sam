@@ -75,7 +75,6 @@ void MarcFileReader::getList(ifstream &fin,vector<int> &list)
             ss>>id;
             list.push_back(id);
         }
-        getline(fin,s);
         getList(fin,list);
     }
     else if (n==3)           //id1  id2  id3    or    id1 to id3
@@ -246,7 +245,9 @@ void MarcFileReader::ReadMatcode(StructuralAnalysisModel* sam)
         finmat>>temp;
         double y=0.0,z=0.0; //y: short, z:long
         finmat>>y>>z;
-        finmat>>sam->property->sections[i].G;
+        double Ec=0.0;
+        finmat>>Ec;
+        sam->property->sections[i].G=Ec*0.425;
         sam->property->sections[i].Jx = (y*z*z*z+y*y*y*z)/12.0;
         for(int j=0;j<nConcrete;++j)    //Concrete fibers
         {
@@ -257,6 +258,7 @@ void MarcFileReader::ReadMatcode(StructuralAnalysisModel* sam)
             finmat>>fiber.yCoord>>fiber.zCoord>>fiber.area;
             finmat>>mat.fc>>mat.epsc>>mat.fcu>>mat.epscu;
             mat.type="concrete";
+            mat.Ec=Ec;
             sam->property->materials.push_back(mat);
             sam->property->sections[i].fibers.push_back(fiber);
         }
