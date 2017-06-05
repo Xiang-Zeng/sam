@@ -19,7 +19,6 @@ int main()
     //manually assign values
     sam->units->force="N";
     sam->units->length="mm";
-
     sam->property->sections.rbegin()->Jx=2.5e9;
     sam->property->sections.rbegin()->G=11667;
     Fiber fiber;
